@@ -6,6 +6,7 @@
 Addon de vídeo en Python para cargar listas **M3U** (archivo local o URL) y opcionalmente una guía **EPG XMLTV**, con navegación por grupos similar a IPTV Simple Client.
 
 - **Versión:** 1.3.1  
+- **Autor:** [entreunosyceros](https://github.com/entreunosyceros)  
 - **Repositorio:** [github.com/entreunosyceros/launcherm3u](https://github.com/entreunosyceros/launcherm3u)  
 - **Releases:** [Releases](https://github.com/entreunosyceros/launcherm3u/releases)
 

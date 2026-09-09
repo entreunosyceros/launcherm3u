@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.launcherm3u" name="Launcher M3U" version="1.3.1" provider-name="LauncherM3U">
+<addon id="plugin.video.launcherm3u" name="Launcher M3U" version="1.3.1" provider-name="entreunosyceros">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
