@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.launcherm3u" name="Launcher M3U" version="1.3.0" provider-name="LauncherM3U">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <!-- Script: necesario para videowindow / vista previa embebida -->
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Fast M3U IPTV player with EPG</summary>
+    <summary lang="es_ES">Reproductor IPTV M3U rápido con EPG</summary>
+    <description lang="en_GB">Load local or remote M3U playlists with SQLite caching optimized for large lists. Optional XMLTV EPG support. Simple browsing by groups, similar to IPTV Simple Client.[CR][CR]Repository: https://github.com/entreunosyceros/launcherm3u</description>
+    <description lang="es_ES">Carga listas M3U locales o remotas con caché SQLite optimizada para listas grandes. Soporte opcional de guía EPG XMLTV. Navegación sencilla por grupos, similar a IPTV Simple Client.[CR][CR]Repositorio: https://github.com/entreunosyceros/launcherm3u</description>
+    <platform>all</platform>
+    <license>GPL-2.0-or-later</license>
+    <website>https://github.com/entreunosyceros/launcherm3u</website>
+    <source>https://github.com/entreunosyceros/launcherm3u</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+    <news>v1.3.0 - Vista previa embebida + pantalla completa.
+v1.2.2 - Restaurar grupos al volver del reproductor.
+v1.2.1 - Contraste grupos + zapping por grupo.
+v1.2.0 - UI IPTV + recarga sin bloqueo.
+v1.1.1 - Fix archivo local M3U y traducciones ES.
+v1.1.0 - Limpieza de caché, descargas, BD y thumbnails desde el addon.
+v1.0.0 - Primera versión: M3U local/URL, EPG XMLTV, caché SQLite y paginación.</news>
+  </extension>
+</addon>

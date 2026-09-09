@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+
+
+# Empaquetado local del addon 
+*.zip
+launcherm3u-*.zip
+
+
+# Datos locales / runtime de Kodi
+*.db
+*.db-wal
+*.db-shm
+downloads/
+ui_skin/
+addon_data/
+
+
+
+

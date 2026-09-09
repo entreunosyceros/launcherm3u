@@ -1,0 +1,527 @@
+# Kodi Media Center language file
+# Addon Name: Launcher M3U
+# Addon id: plugin.video.launcherm3u
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin.video.launcherm3u\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2026-09-04 00:00+0000\n"
+"PO-Revision-Date: 2026-09-04 00:00+0000\n"
+"Last-Translator: LauncherM3U\n"
+"Language-Team: English (United Kingdom)\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#30001"
+msgid "Playlists"
+msgstr "Playlists"
+
+msgctxt "#30002"
+msgid "Performance"
+msgstr "Performance"
+
+msgctxt "#30010"
+msgid "M3U playlist"
+msgstr "M3U playlist"
+
+msgctxt "#30011"
+msgid "Playlist location"
+msgstr "Playlist location"
+
+msgctxt "#30012"
+msgid "Local file"
+msgstr "Local file"
+
+msgctxt "#30013"
+msgid "Internet URL"
+msgstr "Internet URL"
+
+msgctxt "#30014"
+msgid "M3U file path"
+msgstr "M3U file path"
+
+msgctxt "#30015"
+msgid "M3U file URL"
+msgstr "M3U file URL"
+
+msgctxt "#30020"
+msgid "EPG guide"
+msgstr "EPG guide"
+
+msgctxt "#30021"
+msgid "Enable EPG"
+msgstr "Enable EPG"
+
+msgctxt "#30022"
+msgid "EPG location"
+msgstr "EPG location"
+
+msgctxt "#30023"
+msgid "XMLTV file path"
+msgstr "XMLTV file path"
+
+msgctxt "#30024"
+msgid "XMLTV file URL"
+msgstr "XMLTV file URL"
+
+msgctxt "#30025"
+msgid "Show current programme in list"
+msgstr "Show current programme in list"
+
+msgctxt "#30026"
+msgid "Auto preview selected channel"
+msgstr "Auto preview on channel confirm"
+
+msgctxt "#30027"
+msgid "Use InputStream Adaptive for HLS/DASH"
+msgstr "Use InputStream Adaptive for HLS/DASH"
+
+msgctxt "#30030"
+msgid "Cache and pagination"
+msgstr "Cache and pagination"
+
+msgctxt "#30031"
+msgid "Channels per page"
+msgstr "Channels per page"
+
+msgctxt "#30032"
+msgid "Cache lifetime (hours)"
+msgstr "Cache lifetime (hours)"
+
+msgctxt "#30033"
+msgid "Force reload now"
+msgstr "Force reload now"
+
+msgctxt "#30040"
+msgid "Cleanup"
+msgstr "Cleanup"
+
+msgctxt "#30050"
+msgid "Appearance"
+msgstr "Appearance"
+
+msgctxt "#30051"
+msgid "Interface theme"
+msgstr "Interface theme"
+
+msgctxt "#30052"
+msgid "Color palette"
+msgstr "Color palette"
+
+msgctxt "#30053"
+msgid "Blue"
+msgstr "Blue"
+
+msgctxt "#30054"
+msgid "Green"
+msgstr "Green"
+
+msgctxt "#30055"
+msgid "Amber"
+msgstr "Amber"
+
+msgctxt "#30056"
+msgid "Rose"
+msgstr "Rose"
+
+msgctxt "#30057"
+msgid "Violet"
+msgstr "Violet"
+
+msgctxt "#30058"
+msgid "Slate"
+msgstr "Slate"
+
+msgctxt "#30059"
+msgid "Load channel logos"
+msgstr "Load channel logos"
+
+msgctxt "#30060"
+msgid "Select local XMLTV file"
+msgstr "Select local XMLTV file"
+
+msgctxt "#30061"
+msgid "Enter XMLTV URL"
+msgstr "Enter XMLTV URL"
+
+msgctxt "#30062"
+msgid "EPG guide configured"
+msgstr "EPG guide configured"
+
+msgctxt "#30100"
+msgid "Loading M3U playlist..."
+msgstr "Loading M3U playlist..."
+
+msgctxt "#30101"
+msgid "Configure the M3U playlist in settings."
+msgstr "Configure the M3U playlist in settings."
+
+msgctxt "#30102"
+msgid "Parsing channels..."
+msgstr "Parsing channels..."
+
+msgctxt "#30103"
+msgid "Saving to cache..."
+msgstr "Saving to cache..."
+
+msgctxt "#30110"
+msgid "Loading EPG..."
+msgstr "Loading EPG..."
+
+msgctxt "#30111"
+msgid "Configure the EPG guide in settings."
+msgstr "Configure the EPG guide in settings."
+
+msgctxt "#30112"
+msgid "Parsing XMLTV..."
+msgstr "Parsing XMLTV..."
+
+msgctxt "#30200"
+msgid "Settings"
+msgstr "Settings"
+
+msgctxt "#30201"
+msgid "Reload playlist"
+msgstr "Reload playlist"
+
+msgctxt "#30202"
+msgid "All channels"
+msgstr "All channels"
+
+msgctxt "#30203"
+msgid "Browse all channels"
+msgstr "Browse all channels"
+
+msgctxt "#30204"
+msgid "Search"
+msgstr "Search"
+
+msgctxt "#30210"
+msgid "EPG guide"
+msgstr "EPG guide"
+
+msgctxt "#30211"
+msgid "Next page"
+msgstr "Next page"
+
+msgctxt "#30212"
+msgid "Channel not found"
+msgstr "Channel not found"
+
+msgctxt "#30213"
+msgid "No EPG data for this channel"
+msgstr "No EPG data for this channel"
+
+msgctxt "#30214"
+msgid "Playlist reloaded: {0} channels"
+msgstr "Playlist reloaded: {0} channels"
+
+msgctxt "#30220"
+msgid "Select local M3U file"
+msgstr "Select local M3U file"
+
+msgctxt "#30221"
+msgid "M3U file selected"
+msgstr "M3U file selected"
+
+msgctxt "#30222"
+msgid "No file selected"
+msgstr "No file selected"
+
+msgctxt "#30223"
+msgid "Local file not found or unreadable: {0}"
+msgstr "Local file not found or unreadable: {0}"
+
+msgctxt "#30300"
+msgid "Clear cache"
+msgstr "Clear cache"
+
+msgctxt "#30301"
+msgid "Delete addon cache, downloads and thumbnails"
+msgstr "Delete addon cache, downloads and thumbnails"
+
+msgctxt "#30302"
+msgid "Addon storage"
+msgstr "Addon storage"
+
+msgctxt "#30303"
+msgid "Delete M3U/EPG downloads"
+msgstr "Delete M3U/EPG downloads"
+
+msgctxt "#30304"
+msgid "Delete database (channels/EPG)"
+msgstr "Delete database (channels/EPG)"
+
+msgctxt "#30305"
+msgid "Delete thumbnails / logos"
+msgstr "Delete thumbnails / logos"
+
+msgctxt "#30306"
+msgid "Full addon cleanup"
+msgstr "Full addon cleanup"
+
+msgctxt "#30310"
+msgid "Delete cached M3U/EPG downloads?"
+msgstr "Delete cached M3U/EPG downloads?"
+
+msgctxt "#30311"
+msgid "Delete channels and EPG database?"
+msgstr "Delete channels and EPG database?"
+
+msgctxt "#30312"
+msgid "Delete thumbnails/logos cached by this addon?"
+msgstr "Delete thumbnails/logos cached by this addon?"
+
+msgctxt "#30313"
+msgid "Full addon cleanup (cache, downloads, DB and thumbnails)?"
+msgstr "Full addon cleanup (cache, downloads, DB and thumbnails)?"
+
+msgctxt "#30314"
+msgid "Cleaning..."
+msgstr "Cleaning..."
+
+msgctxt "#30315"
+msgid "Cleanup finished: {0} files, {1} freed"
+msgstr "Cleanup finished: {0} files, {1} freed"
+
+msgctxt "#30400"
+msgid "Open IPTV interface"
+msgstr "Open IPTV interface"
+
+msgctxt "#30401"
+msgid "Play"
+msgstr "Play"
+
+msgctxt "#30402"
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
+msgctxt "#30403"
+msgid "Close"
+msgstr "Close"
+
+msgctxt "#30404"
+msgid "Groups"
+msgstr "Groups"
+
+msgctxt "#30405"
+msgid "Channels"
+msgstr "Channels"
+
+msgctxt "#30406"
+msgid "Preview"
+msgstr "Preview"
+
+msgctxt "#30407"
+msgid "Now"
+msgstr "Now"
+
+msgctxt "#30408"
+msgid "Next"
+msgstr "Next"
+
+msgctxt "#30500"
+msgid "Favorites"
+msgstr "Favorites"
+
+msgctxt "#30501"
+msgid "Add to favorites"
+msgstr "Add to favorites"
+
+msgctxt "#30502"
+msgid "Remove from favorites"
+msgstr "Remove from favorites"
+
+msgctxt "#30503"
+msgid "Recent"
+msgstr "Recent"
+
+msgctxt "#30504"
+msgid "Options"
+msgstr "Options"
+
+msgctxt "#30510"
+msgid "Audio track"
+msgstr "Audio track"
+
+msgctxt "#30511"
+msgid "Subtitles"
+msgstr "Subtitles"
+
+msgctxt "#30512"
+msgid "No active playback"
+msgstr "No active playback"
+
+msgctxt "#30513"
+msgid "No audio tracks"
+msgstr "No audio tracks"
+
+msgctxt "#30514"
+msgid "Disable subtitles"
+msgstr "Disable subtitles"
+
+msgctxt "#30520"
+msgid "EPG detected in M3U playlist"
+msgstr "EPG detected in M3U playlist"
+
+msgctxt "#30521"
+msgid "Auto-configure EPG from M3U url-tvg"
+msgstr "Auto-configure EPG from M3U url-tvg"
+
+msgctxt "#30530"
+msgid "Automatic refresh…"
+msgstr "Automatic refresh…"
+
+msgctxt "#30531"
+msgid "Auto-refresh playlist every N hours (0=off)"
+msgstr "Auto-refresh playlist every N hours (0=off)"
+
+msgctxt "#30532"
+msgid "Keep EPG programmes for N hours (0=all)"
+msgstr "Keep EPG programmes for N hours (0=all)"
+
+msgctxt "#30540"
+msgid "Configure the update manifest URL"
+msgstr "Updates come from GitHub Releases"
+
+msgctxt "#30541"
+msgid "You are up to date ({0})"
+msgstr "You are up to date ({0})"
+
+msgctxt "#30542"
+msgid "New version {0} (you have {1})"
+msgstr "New version {0} (you have {1})"
+
+msgctxt "#30543"
+msgid "Check for updates"
+msgstr "Check for updates"
+
+msgctxt "#30544"
+msgid "Updates"
+msgstr "Updates"
+
+msgctxt "#30545"
+msgid "Check for updates on startup"
+msgstr "Check for updates on startup"
+
+msgctxt "#30546"
+msgid "Update manifest URL"
+msgstr "Releases: github.com/entreunosyceros/launcherm3u"
+
+msgctxt "#30550"
+msgid "HTTP headers for downloads/streams"
+msgstr "HTTP headers for downloads/streams"
+
+msgctxt "#30551"
+msgid "User-Agent (empty = default)"
+msgstr "User-Agent (empty = default)"
+
+msgctxt "#30552"
+msgid "Referer"
+msgstr "Referer"
+
+msgctxt "#30553"
+msgid "Origin"
+msgstr "Origin"
+
+msgctxt "#30554"
+msgid "Extra headers (Header: value per line)"
+msgstr "Extra headers (Header: value per line)"
+msgctxt "#30600"
+msgid "Parental control"
+msgstr "Parental control"
+
+msgctxt "#30601"
+msgid "Enable parental control"
+msgstr "Enable parental control"
+
+msgctxt "#30602"
+msgid "Set / change PIN"
+msgstr "Set / change PIN"
+
+msgctxt "#30604"
+msgid "PIN"
+msgstr "PIN"
+
+msgctxt "#30605"
+msgid "Clear all channel locks"
+msgstr "Clear all channel locks"
+
+msgctxt "#30606"
+msgid "Lock channel with PIN"
+msgstr "Lock channel with PIN"
+
+msgctxt "#30607"
+msgid "Unlock channel"
+msgstr "Unlock channel"
+
+msgctxt "#30608"
+msgid "Channel locked"
+msgstr "Channel locked"
+
+msgctxt "#30609"
+msgid "Channel unlocked"
+msgstr "Channel unlocked"
+
+msgctxt "#30610"
+msgid "Enter PIN"
+msgstr "Enter PIN"
+
+msgctxt "#30611"
+msgid "Incorrect PIN"
+msgstr "Incorrect PIN"
+
+msgctxt "#30612"
+msgid "Current PIN"
+msgstr "Current PIN"
+
+msgctxt "#30613"
+msgid "New PIN (numbers)"
+msgstr "New PIN (numbers)"
+
+msgctxt "#30614"
+msgid "PIN must have at least 4 digits"
+msgstr "PIN must have at least 4 digits"
+
+msgctxt "#30615"
+msgid "Repeat PIN"
+msgstr "Repeat PIN"
+
+msgctxt "#30616"
+msgid "PINs do not match"
+msgstr "PINs do not match"
+
+msgctxt "#30617"
+msgid "PIN saved"
+msgstr "PIN saved"
+
+msgctxt "#30618"
+msgid "To lock channels you must set a PIN. Continue?"
+msgstr "To lock channels you must set a PIN. Continue?"
+
+msgctxt "#30619"
+msgid "Locked channel — enter PIN"
+msgstr "Locked channel — enter PIN"
+
+msgctxt "#30620"
+msgid "Channel locked"
+msgstr "Channel locked"
+
+msgctxt "#30621"
+msgid "PIN to unlock"
+msgstr "PIN to unlock"
+
+msgctxt "#30622"
+msgid "PIN to lock"
+msgstr "PIN to lock"
+
+msgctxt "#30623"
+msgid "PIN to clear locks"
+msgstr "PIN to clear locks"
+
+msgctxt "#30624"
+msgid "Locks removed: {0}"
+msgstr "Locks removed: {0}"
