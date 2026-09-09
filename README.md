@@ -1,12 +1,14 @@
 # Launcher M3U — Addon Kodi
+<p align="center">
+<img width="525" height="570" alt="icon" src="https://github.com/user-attachments/assets/5e1ed723-9014-4803-ac62-fa278fd67aec" />
+</p>
 
 Addon de vídeo en Python para cargar listas **M3U** (archivo local o URL) y opcionalmente una guía **EPG XMLTV**, con navegación por grupos similar a IPTV Simple Client.
 
-- **Versión:** 1.3.0  
-- **Repositorio:** [github.com/entreunosyceros/launcherm3u](https://github.com/entreunosyceros/launcherm3u)  
-- **Releases:** [Releases](https://github.com/entreunosyceros/launcherm3u/releases)
-
 ## Características
+<p align="center">
+<img width="1917" height="1047" alt="m3ulauncher-interfaz" src="https://github.com/user-attachments/assets/266d4bdb-babd-413f-a1f8-131ba18a1039" />
+</p>
 
 - Interfaz IPTV propia (grupos + canales con logo + ahora/siguiente)
 - Vista previa embebida y reproducción a pantalla completa del canal activo
@@ -76,6 +78,9 @@ Desde el menú → **Limpiar caché**, o **Ajustes → Rendimiento → Limpieza*
 También puedes usar **Seleccionar archivo M3U local** en el menú del addon (más fiable que solo el selector de ajustes).
 
 ## Ajustes recomendados para listas grandes
+<p align="center">
+<img width="1918" height="1046" alt="guia-epg" src="https://github.com/user-attachments/assets/88760b22-7b9f-4a45-b226-4f40333e1963" />
+</p>
 
 | Ajuste | Sugerencia |
 |--------|------------|
