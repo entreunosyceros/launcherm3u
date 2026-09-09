@@ -62,7 +62,7 @@ No uses **Code → Download ZIP** de GitHub: ese archivo es el repositorio (no e
 
 1. Menú contextual del canal → **Bloquear canal con PIN** (la primera vez crea un PIN de al menos 4 dígitos)
 2. Al reproducir un canal bloqueado se pide el PIN (sesión ~30 minutos)
-3. En **Ajustes → Control parental**: activar, definir/cambiar PIN y quitar todos los bloqueos
+3. En **Ajustes → Control parental**: activar, definir/cambiar PIN y quitar todos los bloqueos (los blqueos se quitarán según el PIN utilizado en cada canal bloqueado)
 
 ### Limpiar caché
 
