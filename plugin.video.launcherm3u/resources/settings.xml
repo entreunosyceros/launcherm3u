@@ -301,6 +301,11 @@
           <default>true</default>
           <control type="toggle"/>
         </setting>
+        <setting id="update_auto_install" type="boolean" label="30640" help="">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
         <setting id="update_check_now" type="action" label="30543" help="">
           <level>0</level>
           <data>RunPlugin(plugin://plugin.video.launcherm3u/?action=check_update)</data>

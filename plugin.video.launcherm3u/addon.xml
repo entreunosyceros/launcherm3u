@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.launcherm3u" name="Launcher M3U" version="1.3.0" provider-name="LauncherM3U">
+<addon id="plugin.video.launcherm3u" name="Launcher M3U" version="1.3.1" provider-name="LauncherM3U">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -23,7 +23,8 @@
       <icon>resources/icon.png</icon>
       <fanart>resources/fanart.jpg</fanart>
     </assets>
-    <news>v1.3.0 - Vista previa embebida + pantalla completa.
+    <news>v1.3.1 - Control parental PIN; descarga e instalación automática de updates.
+v1.3.0 - Vista previa embebida + pantalla completa.
 v1.2.2 - Restaurar grupos al volver del reproductor.
 v1.2.1 - Contraste grupos + zapping por grupo.
 v1.2.0 - UI IPTV + recarga sin bloqueo.

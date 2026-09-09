@@ -530,3 +530,45 @@ msgstr "PIN para quitar bloqueos"
 msgctxt "#30624"
 msgid "Locks removed: {0}"
 msgstr "Bloqueos eliminados: {0}"
+msgctxt "#30630"
+msgid "Open download page"
+msgstr "Abrir página de descarga"
+
+msgctxt "#30631"
+msgid "Later"
+msgstr "Más tarde"
+msgctxt "#30632"
+msgid "Downloading update…"
+msgstr "Descargando actualización…"
+
+msgctxt "#30633"
+msgid "Invalid update ZIP"
+msgstr "ZIP de actualización no válido"
+
+msgctxt "#30634"
+msgid "Installing update…"
+msgstr "Instalando actualización…"
+
+msgctxt "#30635"
+msgid "No install ZIP found in the GitHub release"
+msgstr "No hay ZIP de instalación en el release de GitHub"
+
+msgctxt "#30636"
+msgid "Could not download the update"
+msgstr "No se pudo descargar la actualización"
+
+msgctxt "#30637"
+msgid "Updated to {0}. Restart the addon."
+msgstr "Actualizado a {0}. Reinicia el addon."
+
+msgctxt "#30638"
+msgid "Could not install the update"
+msgstr "No se pudo instalar la actualización"
+
+msgctxt "#30639"
+msgid "Install now"
+msgstr "Instalar ahora"
+
+msgctxt "#30640"
+msgid "Download and install updates automatically"
+msgstr "Descargar e instalar actualizaciones automáticamente"

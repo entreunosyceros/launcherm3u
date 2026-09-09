@@ -24,6 +24,31 @@ class FakeMonitor:
     def abortRequested(self):
         return False
 
+    def waitForAbort(self, _timeout=0):
+        return False
+
+
+class FakeDialogProgress:
+    def create(self, *_args, **_kwargs):
+        pass
+
+    def update(self, *_args, **_kwargs):
+        pass
+
+    def iscanceled(self):
+        return False
+
+    def close(self):
+        pass
+
+
+class FakeDialog:
+    def yesno(self, *_args, **_kwargs):
+        return False
+
+    def select(self, *_args, **_kwargs):
+        return -1
+
 
 class FakePlayer:
     last_play = None
@@ -98,6 +123,8 @@ class OptimizedCoreTests(unittest.TestCase):
         xbmcgui.ListItem = FakeListItem
         xbmcgui.WindowXML = object
         xbmcgui.Window = FakeWindow
+        xbmcgui.Dialog = FakeDialog
+        xbmcgui.DialogProgress = FakeDialogProgress
         sys.modules["xbmcgui"] = xbmcgui
 
         xbmcplugin = types.ModuleType("xbmcplugin")
@@ -343,25 +370,39 @@ class OptimizedCoreTests(unittest.TestCase):
 
     def test_update_version_compare_and_headers(self):
         updates = importlib.import_module("lib.updates")
+        self.assertTrue(updates.is_newer("1.3.1", "1.3.0"))
+        self.assertFalse(updates.is_newer("1.3.0", "1.3.1"))
         self.assertTrue(updates.is_newer("1.4.0", "1.3.0"))
         self.assertFalse(updates.is_newer("1.3.0", "1.3.0"))
         release = updates.parse_github_release(
             json.dumps(
                 {
-                    "tag_name": "v1.4.0",
-                    "html_url": "https://github.com/entreunosyceros/launcherm3u/releases/tag/v1.4.0",
-                    "body": "fixes",
+                    "tag_name": "v1.3.1",
+                    "html_url": "https://github.com/entreunosyceros/launcherm3u/releases/tag/v1.3.1",
+                    "body": "PIN parental + diálogo de update",
                     "assets": [
                         {
-                            "name": "launcherm3u-1.4.0.zip",
-                            "browser_download_url": "https://github.com/entreunosyceros/launcherm3u/releases/download/v1.4.0/launcherm3u-1.4.0.zip",
-                        }
+                            "name": "plugin.video.launcherm3u-1.3.1.zip",
+                            "browser_download_url": "https://github.com/entreunosyceros/launcherm3u/releases/download/v1.3.1/plugin.video.launcherm3u-1.3.1.zip",
+                        },
+                        {
+                            "name": "launcherm3u-1.3.1.zip",
+                            "browser_download_url": "https://github.com/entreunosyceros/launcherm3u/releases/download/v1.3.1/launcherm3u-1.3.1.zip",
+                        },
                     ],
                 }
             )
         )
-        self.assertEqual(release["version"], "1.4.0")
-        self.assertIn("launcherm3u-1.4.0.zip", release["url"])
+        self.assertEqual(release["version"], "1.3.1")
+        self.assertIn("plugin.video.launcherm3u-1.3.1.zip", release["url"])
+        self.assertTrue(
+            updates.is_trusted_zip_url(
+                "https://github.com/entreunosyceros/launcherm3u/releases/download/v1.3.1/plugin.video.launcherm3u-1.3.1.zip"
+            )
+        )
+        self.assertFalse(
+            updates.is_trusted_zip_url("https://evil.example/malware.zip")
+        )
         self.assertEqual(updates.GITHUB_REPO, "entreunosyceros/launcherm3u")
         self.downloader.ku.get_setting = (
             lambda key, default="": {
