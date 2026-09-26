@@ -46,6 +46,9 @@
       <texturenofocus colordiffuse="FF1F2937">white.png</texturenofocus>
       <align>center</align>
       <aligny>center</aligny>
+      <onleft>405</onleft>
+      <onright>401</onright>
+      <ondown>200</ondown>
     </control>
     <control type="button" id="401">
       <left>1290</left><top>16</top><width>110</width><height>40</height>
@@ -57,6 +60,9 @@
       <texturenofocus colordiffuse="FF1F2937">white.png</texturenofocus>
       <align>center</align>
       <aligny>center</aligny>
+      <onleft>403</onleft>
+      <onright>404</onright>
+      <ondown>200</ondown>
     </control>
     <control type="button" id="404">
       <left>1410</left><top>16</top><width>100</width><height>40</height>
@@ -68,6 +74,9 @@
       <texturenofocus colordiffuse="FF1F2937">white.png</texturenofocus>
       <align>center</align>
       <aligny>center</aligny>
+      <onleft>401</onleft>
+      <onright>406</onright>
+      <ondown>200</ondown>
     </control>
     <control type="button" id="406">
       <left>1520</left><top>16</top><width>80</width><height>40</height>
@@ -79,6 +88,9 @@
       <texturenofocus colordiffuse="FF1F2937">white.png</texturenofocus>
       <align>center</align>
       <aligny>center</aligny>
+      <onleft>404</onleft>
+      <onright>402</onright>
+      <ondown>200</ondown>
     </control>
     <control type="button" id="402">
       <left>1610</left><top>16</top><width>110</width><height>40</height>
@@ -90,6 +102,9 @@
       <texturenofocus colordiffuse="FF1F2937">white.png</texturenofocus>
       <align>center</align>
       <aligny>center</aligny>
+      <onleft>406</onleft>
+      <onright>405</onright>
+      <ondown>200</ondown>
     </control>
     <control type="button" id="405">
       <left>1730</left><top>16</top><width>150</width><height>40</height>
@@ -101,6 +116,9 @@
       <texturenofocus colordiffuse="FF7F1D1D">white.png</texturenofocus>
       <align>center</align>
       <aligny>center</aligny>
+      <onleft>402</onleft>
+      <onright>403</onright>
+      <ondown>200</ondown>
     </control>
 
     <!-- Panel grupos -->
@@ -117,6 +135,8 @@
     <control type="list" id="100">
       <left>48</left><top>190</top><width>330</width><height>820</height>
       <onright>200</onright>
+      <onup>403</onup>
+      <wraparound>false</wraparound>
       <pagecontrol>101</pagecontrol>
       <scrolltime>200</scrolltime>
       <orientation>vertical</orientation>
@@ -175,6 +195,8 @@
       <left>448</left><top>190</top><width>840</width><height>820</height>
       <onleft>100</onleft>
       <onright>400</onright>
+      <onup>403</onup>
+      <wraparound>false</wraparound>
       <pagecontrol>201</pagecontrol>
       <scrolltime tween="quadratic">200</scrolltime>
       <orientation>vertical</orientation>

@@ -5,7 +5,7 @@
 
 Addon de vídeo en Python para cargar listas **M3U** (archivo local o URL) y opcionalmente una guía **EPG XMLTV**, con navegación por grupos similar a IPTV Simple Client.
 
-- **Versión:** 1.3.1  
+- **Versión:** 1.3.3  
 - **Autor:** [entreunosyceros](https://github.com/entreunosyceros)  
 - **Repositorio:** [github.com/entreunosyceros/launcherm3u](https://github.com/entreunosyceros/launcherm3u)  
 - **Releases:** [Releases](https://github.com/entreunosyceros/launcherm3u/releases)
@@ -41,7 +41,7 @@ Addon de vídeo en Python para cargar listas **M3U** (archivo local o URL) y opc
    ```bash
    python3 build_zip.py
    ```
-2. Usa el archivo **`plugin.video.launcherm3u-1.3.1.zip`** (también se crea el alias `launcherm3u-1.3.1.zip`).
+2. Usa el archivo **`plugin.video.launcherm3u-1.3.3.zip`** (también se crea el alias `launcherm3u-1.3.3.zip`).
 3. En Kodi: **Add-ons → Instalar desde un archivo ZIP** → elige ese ZIP.
 4. Si una instalación anterior falló, **cierra Kodi por completo** y vuelve a intentarlo.
 

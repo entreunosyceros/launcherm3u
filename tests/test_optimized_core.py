@@ -154,6 +154,7 @@ class OptimizedCoreTests(unittest.TestCase):
             getAddonInfo=lambda key: "1.3.0" if key == "version" else "",
         )
         ku.ADDON_ID = "plugin.video.launcherm3u"
+        ku.ADDON_PATH = cls.profile.name
         ku.end_directory = lambda *_args, **_kwargs: None
         ku.plugin_url = lambda **_kwargs: "plugin://plugin.video.launcherm3u/"
         sys.modules["lib.kodi_utils"] = ku
@@ -370,6 +371,7 @@ class OptimizedCoreTests(unittest.TestCase):
 
     def test_update_version_compare_and_headers(self):
         updates = importlib.import_module("lib.updates")
+        self.assertTrue(updates.is_newer("1.3.2", "1.3.1"))
         self.assertTrue(updates.is_newer("1.3.1", "1.3.0"))
         self.assertFalse(updates.is_newer("1.3.0", "1.3.1"))
         self.assertTrue(updates.is_newer("1.4.0", "1.3.0"))
@@ -404,6 +406,25 @@ class OptimizedCoreTests(unittest.TestCase):
             updates.is_trusted_zip_url("https://evil.example/malware.zip")
         )
         self.assertEqual(updates.GITHUB_REPO, "entreunosyceros/launcherm3u")
+        theme = importlib.import_module("lib.theme")
+        empty_root = os.path.join(self.profile.name, "empty_skin")
+        ok, detail = theme.validate_skin(empty_root)
+        self.assertFalse(ok)
+        self.assertIn("missing", detail)
+        # Minimal valid skin tree
+        skin_root = os.path.join(self.profile.name, "ok_skin")
+        for res in ("1080i", "720p"):
+            d = os.path.join(skin_root, "resources", "skins", "Default", res)
+            os.makedirs(d, exist_ok=True)
+            with open(os.path.join(d, "launcherm3u-main.xml"), "w", encoding="utf-8") as fh:
+                fh.write("<window>" + ("x" * 120) + "</window>")
+        media = os.path.join(skin_root, "resources", "skins", "Default", "media")
+        os.makedirs(media, exist_ok=True)
+        with open(os.path.join(media, "white.png"), "wb") as fh:
+            fh.write(b"\x89PNG\r\n\x1a\n" + b"\0" * 16)
+        ok, detail = theme.validate_skin(skin_root)
+        self.assertTrue(ok)
+        self.assertEqual(detail, "ok")
         self.downloader.ku.get_setting = (
             lambda key, default="": {
                 "http_user_agent": "TestAgent/1.0",

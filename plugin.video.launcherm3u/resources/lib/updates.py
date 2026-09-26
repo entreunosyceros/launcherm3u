@@ -426,9 +426,9 @@ def notify_if_update(force: bool = False) -> None:
     download = info.get("url") or ""
     ku.log(f"Update available {info['remote']} download={download}")
 
-    auto_install = ku.get_setting_bool("update_auto_install", True)
+    auto_install = ku.get_setting_bool("update_auto_install", False)
 
-    # Comprobación manual: diálogo con opciones
+    # Comprobación manual: diálogo con opciones (hilo UI seguro)
     if force:
         notes = (info.get("notes") or "").strip()
         body = msg
@@ -450,10 +450,25 @@ def notify_if_update(force: bool = False) -> None:
             _open_release_page(page)
         return
 
-    # Arranque en segundo plano
+    # Arranque en segundo plano: NUNCA Extract/Monitor aquí (crashea Android).
+    # Si auto-install está activo, encolar en el hilo de plugin vía RunPlugin.
     if auto_install and is_trusted_zip_url(download):
-        ku.notify(msg, time_ms=4000)
-        apply_update(info, show_progress=False)
+        try:
+            from . import cache
+
+            cache.set_meta("update_pending_install", "1")
+            cache.set_meta("update_remote_version", str(info.get("remote") or ""))
+            cache.set_meta("update_download_url", download)
+        except Exception:
+            pass
+        ku.log(
+            f"Update {info['remote']} queued for install via RunPlugin "
+            "(background thread must not Extract)"
+        )
+        xbmc.executebuiltin(
+            f"RunPlugin({ku.plugin_url(action='install_update')})"
+        )
         return
 
-    ku.notify(f"{msg} — {page}", time_ms=8000)
+    # Solo aviso; sin diálogos pesados desde worker
+    ku.log(f"Update available (notify only): {msg} — {page}")

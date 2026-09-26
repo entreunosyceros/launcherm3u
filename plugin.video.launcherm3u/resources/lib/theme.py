@@ -265,9 +265,9 @@ def _xml_template(p: Dict[str, str]) -> str:
       <aligny>center</aligny>
     </control>
 
-    <!-- Iconos cabecera (navegables y clicables) -->
+    <!-- Iconos cabecera (navegables con mando: left/right + down a listas) -->
     <control type="button" id="403">
-      <left>1488</left><top>8</top><width>56</width><height>56</height>
+      <left>1472</left><top>4</top><width>64</width><height>64</height>
       <label></label>
       <texturefocus>icons/search_focus.png</texturefocus>
       <texturenofocus>icons/search.png</texturenofocus>
@@ -275,9 +275,10 @@ def _xml_template(p: Dict[str, str]) -> str:
       <onleft>405</onleft>
       <onright>401</onright>
       <ondown>200</ondown>
+      <onup>403</onup>
     </control>
     <control type="button" id="401">
-      <left>1552</left><top>8</top><width>56</width><height>56</height>
+      <left>1540</left><top>4</top><width>64</width><height>64</height>
       <label></label>
       <texturefocus>icons/reload_focus.png</texturefocus>
       <texturenofocus>icons/reload.png</texturenofocus>
@@ -285,9 +286,10 @@ def _xml_template(p: Dict[str, str]) -> str:
       <onleft>403</onleft>
       <onright>404</onright>
       <ondown>200</ondown>
+      <onup>401</onup>
     </control>
     <control type="button" id="404">
-      <left>1616</left><top>8</top><width>56</width><height>56</height>
+      <left>1608</left><top>4</top><width>64</width><height>64</height>
       <label></label>
       <texturefocus>icons/file_focus.png</texturefocus>
       <texturenofocus>icons/file.png</texturenofocus>
@@ -295,9 +297,10 @@ def _xml_template(p: Dict[str, str]) -> str:
       <onleft>401</onleft>
       <onright>406</onright>
       <ondown>200</ondown>
+      <onup>404</onup>
     </control>
     <control type="button" id="406">
-      <left>1680</left><top>8</top><width>56</width><height>56</height>
+      <left>1676</left><top>4</top><width>64</width><height>64</height>
       <label></label>
       <texturefocus>icons/url_focus.png</texturefocus>
       <texturenofocus>icons/url.png</texturenofocus>
@@ -305,9 +308,10 @@ def _xml_template(p: Dict[str, str]) -> str:
       <onleft>404</onleft>
       <onright>402</onright>
       <ondown>200</ondown>
+      <onup>406</onup>
     </control>
     <control type="button" id="402">
-      <left>1744</left><top>8</top><width>56</width><height>56</height>
+      <left>1744</left><top>4</top><width>64</width><height>64</height>
       <label></label>
       <texturefocus>icons/settings_focus.png</texturefocus>
       <texturenofocus>icons/settings.png</texturenofocus>
@@ -315,9 +319,10 @@ def _xml_template(p: Dict[str, str]) -> str:
       <onleft>406</onleft>
       <onright>405</onright>
       <ondown>200</ondown>
+      <onup>402</onup>
     </control>
     <control type="button" id="405">
-      <left>1808</left><top>8</top><width>56</width><height>56</height>
+      <left>1812</left><top>4</top><width>64</width><height>64</height>
       <label></label>
       <texturefocus>icons/close_focus.png</texturefocus>
       <texturenofocus>icons/close.png</texturenofocus>
@@ -325,6 +330,7 @@ def _xml_template(p: Dict[str, str]) -> str:
       <onleft>402</onleft>
       <onright>403</onright>
       <ondown>200</ondown>
+      <onup>405</onup>
     </control>
 
     <control type="image">
@@ -341,6 +347,8 @@ def _xml_template(p: Dict[str, str]) -> str:
       <left>48</left><top>166</top><width>330</width><height>844</height>
       <onright>200</onright>
       <onup>403</onup>
+      <ondown>100</ondown>
+      <wraparound>false</wraparound>
       <pagecontrol>101</pagecontrol>
       <scrolltime>200</scrolltime>
       <orientation>vertical</orientation>
@@ -382,6 +390,7 @@ def _xml_template(p: Dict[str, str]) -> str:
       <showonepage>false</showonepage>
       <onleft>100</onleft>
       <onright>200</onright>
+      <onup>403</onup>
     </control>
 
     <control type="image">
@@ -399,6 +408,8 @@ def _xml_template(p: Dict[str, str]) -> str:
       <onleft>100</onleft>
       <onright>400</onright>
       <onup>403</onup>
+      <ondown>200</ondown>
+      <wraparound>false</wraparound>
       <pagecontrol>201</pagecontrol>
       <scrolltime tween="quadratic">200</scrolltime>
       <orientation>vertical</orientation>
@@ -464,6 +475,7 @@ def _xml_template(p: Dict[str, str]) -> str:
       <showonepage>false</showonepage>
       <onleft>200</onleft>
       <onright>400</onright>
+      <onup>403</onup>
     </control>
 
     <control type="image">
@@ -551,6 +563,9 @@ def _xml_template(p: Dict[str, str]) -> str:
       <align>center</align>
       <aligny>center</aligny>
       <onleft>200</onleft>
+      <onright>400</onright>
+      <onup>402</onup>
+      <ondown>400</ondown>
     </control>
 
   </controls>
@@ -562,14 +577,17 @@ def prepare_skin() -> str:
     """
     Genera XML + iconos en el perfil del addon y devuelve la ruta raíz
     para WindowXML (debe contener resources/skins/...).
+    Escribe 1080i y 720p (mismo layout) para builds Android picky.
     """
     palette = get_palette()
     root = os.path.join(ku.ensure_profile(), "ui_skin")
-    skin_1080 = os.path.join(root, "resources", "skins", "Default", "1080i")
-    media = os.path.join(root, "resources", "skins", "Default", "media")
+    skin_default = os.path.join(root, "resources", "skins", "Default")
+    skin_1080 = os.path.join(skin_default, "1080i")
+    skin_720 = os.path.join(skin_default, "720p")
+    media = os.path.join(skin_default, "media")
     icons_dst = os.path.join(media, "icons")
-    os.makedirs(skin_1080, exist_ok=True)
-    os.makedirs(icons_dst, exist_ok=True)
+    for path in (skin_1080, skin_720, icons_dst):
+        os.makedirs(path, exist_ok=True)
 
     _ensure_white(media)
 
@@ -585,25 +603,79 @@ def prepare_skin() -> str:
                 not os.path.exists(dst)
                 or os.path.getsize(src) != os.path.getsize(dst)
             ):
-                shutil.copy2(src, dst)
+                try:
+                    shutil.copy2(src, dst)
+                except OSError as exc:
+                    ku.log(f"copy icon {name}: {exc}", level=2)
     else:
         try:
             _build_icons(media, palette)
         except Exception as exc:
             ku.log(f"No se pudieron generar iconos: {exc}", level=3)
 
-    xml_path = os.path.join(skin_1080, "launcherm3u-main.xml")
-    xml = _xml_template(palette)
-    current = ""
-    try:
-        with open(xml_path, "r", encoding="utf-8") as fh:
-            current = fh.read()
-    except OSError:
-        pass
-    if current != xml:
-        with open(xml_path, "w", encoding="utf-8") as fh:
-            fh.write(xml)
+    # white.png desde el addon si sigue faltando
+    white = os.path.join(media, "white.png")
+    if not os.path.isfile(white) or os.path.getsize(white) < 1:
+        bundled_white = os.path.join(
+            ku.ADDON_PATH, "resources", "skins", "Default", "media", "white.png"
+        )
+        if os.path.isfile(bundled_white):
+            try:
+                shutil.copy2(bundled_white, white)
+            except OSError as exc:
+                ku.log(f"copy white.png: {exc}", level=3)
 
-    if not xbmcvfs.exists(skin_1080):
-        xbmcvfs.mkdirs(skin_1080)
+    xml = _xml_template(palette)
+    for skin_dir in (skin_1080, skin_720):
+        xml_path = os.path.join(skin_dir, "launcherm3u-main.xml")
+        current = ""
+        try:
+            with open(xml_path, "r", encoding="utf-8") as fh:
+                current = fh.read()
+        except OSError:
+            pass
+        if current != xml:
+            try:
+                with open(xml_path, "w", encoding="utf-8") as fh:
+                    fh.write(xml)
+            except OSError as exc:
+                ku.log(f"write skin xml {xml_path}: {exc}", level=3)
+
+    ok, detail = validate_skin(root)
+    if not ok:
+        ku.log(f"prepare_skin validation failed: {detail}", level=3)
+        # Reintento: copiar white + reescribir XML
+        _ensure_white(media)
+        for skin_dir in (skin_1080, skin_720):
+            try:
+                with open(
+                    os.path.join(skin_dir, "launcherm3u-main.xml"),
+                    "w",
+                    encoding="utf-8",
+                ) as fh:
+                    fh.write(xml)
+            except OSError:
+                pass
+        ok, detail = validate_skin(root)
+        ku.log(f"prepare_skin retry: ok={ok} {detail}", level=2 if ok else 3)
+
     return root
+
+
+def validate_skin(root: str) -> tuple:
+    """Comprueba XML + white.png mínimos para WindowXML."""
+    missing = []
+    for res in ("1080i", "720p"):
+        xml_path = os.path.join(
+            root, "resources", "skins", "Default", res, "launcherm3u-main.xml"
+        )
+        if not os.path.isfile(xml_path) or os.path.getsize(xml_path) < 100:
+            missing.append(xml_path)
+    white = os.path.join(
+        root, "resources", "skins", "Default", "media", "white.png"
+    )
+    if not os.path.isfile(white) or os.path.getsize(white) < 1:
+        missing.append(white)
+    if missing:
+        return False, "missing: " + ", ".join(missing)
+    return True, "ok"

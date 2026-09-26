@@ -54,6 +54,7 @@ def main() -> None:
             "browse_epg",
             "url_epg",
             "check_update",
+            "install_update",
             "toggle_favorite",
             "toggle_locked",
             "set_pin",

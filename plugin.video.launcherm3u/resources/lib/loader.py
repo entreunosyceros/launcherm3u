@@ -321,8 +321,8 @@ def _maybe_apply_url_tvg(playlist_path: str) -> None:
     ku.set_setting_int("epg_type", 1)
     if current != url_tvg:
         ku.set_setting("epg_url", url_tvg)
+        # No notify desde aquí: load_playlist puede correr en hilo worker (Android).
         ku.log(f"url-tvg aplicado: {url_tvg}")
-        ku.notify(ku.get_string(30520) or "EPG detectado en la lista M3U")
 
 
 def maybe_scheduled_refresh_due() -> bool:
@@ -350,8 +350,8 @@ def ensure_data(force: bool = False, show_progress: bool = False) -> None:
             try:
                 load_epg(force=force, show_progress=show_progress, manage_busy=False)
             except Exception as exc:
+                # Log only: ensure_data puede ejecutarse fuera del hilo UI.
                 ku.log(f"EPG error: {exc}", level=3)
-                ku.notify_error(str(exc))
         # Poda ligera aunque no se recargue EPG completo
         keep_hours = ku.get_setting_int("epg_keep_hours", 72)
         if keep_hours > 0 and ku.get_setting_bool("epg_enabled", False):

@@ -303,7 +303,7 @@
         </setting>
         <setting id="update_auto_install" type="boolean" label="30640" help="">
           <level>0</level>
-          <default>true</default>
+          <default>false</default>
           <control type="toggle"/>
         </setting>
         <setting id="update_check_now" type="action" label="30543" help="">

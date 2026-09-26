@@ -597,6 +597,33 @@ def route(params: dict) -> None:
         from . import updates
 
         updates.notify_if_update(force=True)
+    elif action == "install_update":
+        from . import updates
+
+        info = {
+            "remote": "",
+            "url": "",
+        }
+        try:
+            info["remote"] = cache.get_meta("update_remote_version", "") or ""
+            info["url"] = cache.get_meta("update_download_url", "") or ""
+        except Exception:
+            pass
+        if not info["url"]:
+            checked = updates.check_for_updates(force=True)
+            if checked.get("update"):
+                info = checked
+        if info.get("url") and updates.is_trusted_zip_url(str(info.get("url") or "")):
+            updates.apply_update(info, show_progress=True)
+            try:
+                cache.set_meta("update_pending_install", "0")
+            except Exception:
+                pass
+        else:
+            ku.notify_error(
+                ku.get_string(30635)
+                or "No hay ZIP de instalación en el release de GitHub"
+            )
     elif action == "audio_tracks":
         from . import player as zap
 

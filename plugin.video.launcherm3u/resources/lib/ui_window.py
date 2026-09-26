@@ -44,6 +44,10 @@ ACTION_MOUSE_DOUBLE_CLICK = 103
 ACTION_MOUSE_MOVE = 107
 ACTION_CONTEXT_MENU = 117
 ACTION_SHOW_INFO = 11
+ACTION_MOVE_LEFT = 1
+ACTION_MOVE_RIGHT = 2
+ACTION_MOVE_UP = 3
+ACTION_MOVE_DOWN = 4
 
 _TOOLBAR = {
     CTRL_SEARCH,
@@ -79,6 +83,7 @@ class MainWindow(xbmcgui.WindowXML):
         self._reload_thread = None
         self._reload_result = None
         self._update_checked = False
+        self._controls_ok = False
 
     def onInit(self):
         """
@@ -88,6 +93,16 @@ class MainWindow(xbmcgui.WindowXML):
         first_run = not self._ready
         self._ready = True
         try:
+            try:
+                self.getControl(CTRL_GROUPS)
+                self.getControl(CTRL_CHANNELS)
+                self._controls_ok = True
+            except Exception as exc:
+                self._controls_ok = False
+                ku.log(f"UI controls missing (bad skin?): {exc}", level=3)
+                self.close()
+                return
+
             if first_run:
                 for cid, sid, fallback in (
                     (CTRL_PLAY, 30402, "Pantalla completa"),
@@ -125,7 +140,8 @@ class MainWindow(xbmcgui.WindowXML):
                 item = self.getControl(CTRL_CHANNELS).getSelectedItem()
                 if item:
                     self._update_epg_from_listitem(item)
-                    if ku.get_setting_bool("auto_preview", False):
+                    # Evitar auto-preview en el primer onInit (Android TV / cajas)
+                    if (not first_run) and ku.get_setting_bool("auto_preview", False):
                         self._preview_selected()
                 if first_run:
                     self._maybe_auto_refresh()
@@ -133,6 +149,11 @@ class MainWindow(xbmcgui.WindowXML):
         except Exception as exc:
             ku.log(f"UI init error: {exc}", level=3)
             ku.notify_error(str(exc))
+            self._controls_ok = False
+            try:
+                self.close()
+            except Exception:
+                pass
 
     def _restore_group_selection(self):
         """Resalta el grupo activo tras recargar la lista."""
@@ -984,6 +1005,34 @@ class MainWindow(xbmcgui.WindowXML):
 
         focus = self.getFocusId()
 
+        # Mando a distancia: salir de listas hacia el toolbar (UP en primer ítem)
+        if aid == ACTION_MOVE_UP:
+            if focus in (CTRL_CHANNELS, CTRL_GROUPS):
+                try:
+                    pos = int(self.getControl(focus).getSelectedPosition())
+                except Exception:
+                    pos = -1
+                if pos <= 0:
+                    try:
+                        self.setFocusId(CTRL_SEARCH)
+                    except Exception:
+                        pass
+                    return
+            elif focus == CTRL_PLAY:
+                try:
+                    self.setFocusId(CTRL_SETTINGS)
+                except Exception:
+                    pass
+                return
+
+        # Desde toolbar, DOWN vuelve a canales / grupos
+        if aid == ACTION_MOVE_DOWN and focus in _TOOLBAR:
+            try:
+                self.setFocusId(CTRL_CHANNELS)
+            except Exception:
+                pass
+            return
+
         # Solo actualizar ficha al pasar el ratón; no cargar stream
         if aid == ACTION_MOUSE_MOVE:
             if focus == CTRL_CHANNELS:
@@ -1042,15 +1091,51 @@ class MainWindow(xbmcgui.WindowXML):
 
 
 def open_main() -> None:
-    from .theme import prepare_skin
+    from .theme import prepare_skin, validate_skin
 
     xml = "launcherm3u-main.xml"
     path = prepare_skin()
+    try:
+        res = xbmc.getInfoLabel("System.ScreenResolution") or "?"
+    except Exception:
+        res = "?"
+    try:
+        ok_skin, detail = validate_skin(path)
+        channels = cache.count_channels()
+    except Exception as exc:
+        ok_skin, detail, channels = False, str(exc), -1
+    ku.log(
+        f"UI open resolution={res} skin={path} validate={ok_skin}/{detail} "
+        f"channels={channels}"
+    )
+
     global_window = xbmcgui.Window(GLOBAL_WINDOW_ID)
     global_window.setProperty(PROP_UI_RUNNING, "1")
+
+    def _open_resolution(resolution: str) -> bool:
+        try:
+            window = MainWindow(xml, path, "Default", resolution)
+            window.doModal()
+            controls_ok = bool(getattr(window, "_controls_ok", False))
+            del window
+            ku.log(f"UI {resolution} closed controls_ok={controls_ok}")
+            return controls_ok
+        except Exception as exc:
+            ku.log(f"WindowXML {resolution} failed: {exc}", level=3)
+            return False
+
     try:
-        window = MainWindow(xml, path, "Default", "1080i")
-        window.doModal()
-        del window
+        opened = _open_resolution("1080i")
+        if not opened:
+            ku.log("Retrying UI with 720p skin folder", level=2)
+            opened = _open_resolution("720p")
+        if not opened:
+            ku.notify_error(
+                ku.get_string(30641)
+                or "Interfaz no disponible; abriendo lista clásica"
+            )
+            xbmc.executebuiltin(
+                f'ActivateWindow(Videos,{ku.plugin_url(action="channels")},return)'
+            )
     finally:
         global_window.clearProperty(PROP_UI_RUNNING)
