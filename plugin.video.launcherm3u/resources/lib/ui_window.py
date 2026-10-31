@@ -137,11 +137,31 @@ class MainWindow(xbmcgui.WindowXML):
                     self.setFocusId(CTRL_CHANNELS)
                 except Exception:
                     pass
+                # Si el stream sigue vivo tras volver de fullscreen, restaurar
+                # preview sin llamar a Player.play otra vez.
+                live_id = 0
+                try:
+                    from . import player as zap
+
+                    if xbmc.Player().isPlaying():
+                        live_id = int(zap.active_channel_id() or 0)
+                except Exception:
+                    live_id = 0
+                if live_id:
+                    self._preview_id = live_id
+                    self._preview_mode = True
+                    self._selected_id = live_id
+                    self._set_preview_chrome(True)
                 item = self.getControl(CTRL_CHANNELS).getSelectedItem()
                 if item:
                     self._update_epg_from_listitem(item)
                     # Evitar auto-preview en el primer onInit (Android TV / cajas)
-                    if (not first_run) and ku.get_setting_bool("auto_preview", False):
+                    # y si ya hay reproducción activa (no reconectar).
+                    if (
+                        (not first_run)
+                        and (not live_id)
+                        and ku.get_setting_bool("auto_preview", False)
+                    ):
                         self._preview_selected()
                 if first_run:
                     self._maybe_auto_refresh()
@@ -647,22 +667,35 @@ class MainWindow(xbmcgui.WindowXML):
             if self._preview_mode and self._preview_id
             else (self._selected_channel_id() or self._selected_id)
         )
+        from . import player as zap
+
         if not channel_id:
             item = self.getControl(CTRL_CHANNELS).getSelectedItem()
             stream = item.getProperty("stream") if item else ""
             if not stream:
                 ku.notify(ku.get_string(30212) or "Canal no encontrado")
                 return
+            # Mismo stream ya en play → promover sin reconectar.
+            if xbmc.Player().isPlaying() and stream == (zap.active_url() or ""):
+                self._preview_mode = False
+                self._set_preview_chrome(False)
+                zap.promote_to_fullscreen()
+                return
             self._preview_mode = False
             self._set_preview_chrome(False)
             xbmc.Player().play(stream, xbmcgui.ListItem(path=stream), False)
             return
 
-        from . import player as zap
-
-        self._preview_mode = False
         self._preview_id = int(channel_id)
         self._selected_id = int(channel_id)
+        # Si ya suena este canal (preview), promover sin Player.play.
+        if zap.is_playing_channel(int(channel_id)):
+            self._preview_mode = False
+            self._set_preview_chrome(False)
+            zap.promote_to_fullscreen()
+            return
+
+        self._preview_mode = False
         self._set_preview_chrome(False)
         zap.play_channel(int(channel_id), notify_zap=False, windowed=False)
 

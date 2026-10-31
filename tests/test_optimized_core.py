@@ -52,10 +52,12 @@ class FakeDialog:
 
 class FakePlayer:
     last_play = None
+    play_count = 0
     playing = False
 
     def play(self, item, listitem=None, windowed=False, *args, **kwargs):
         FakePlayer.last_play = (item, listitem, bool(windowed))
+        FakePlayer.play_count += 1
         FakePlayer.playing = True
 
     def stop(self):
@@ -63,6 +65,14 @@ class FakePlayer:
 
     def isPlaying(self):
         return FakePlayer.playing
+
+
+class FakeBuiltins:
+    calls = []
+
+    @classmethod
+    def executebuiltin(cls, *args):
+        cls.calls.append(args[0] if args else "")
 
 
 class FakeListItem:
@@ -112,7 +122,7 @@ class OptimizedCoreTests(unittest.TestCase):
         xbmc.Player = FakePlayer
         xbmc.Monitor = FakeMonitor
         xbmc.sleep = lambda _ms: None
-        xbmc.executebuiltin = lambda *_args: None
+        xbmc.executebuiltin = FakeBuiltins.executebuiltin
         xbmc.LOGINFO = 1
         xbmc.LOGERROR = 3
         xbmc.LOGWARNING = 2
@@ -211,6 +221,29 @@ class OptimizedCoreTests(unittest.TestCase):
         self.assertTrue(self.player.play_channel(target["id"], windowed=False))
         self.assertEqual(FakePlayer.last_play[0], target["url"])
         self.assertFalse(FakePlayer.last_play[2])
+
+    def test_preview_to_fullscreen_does_not_replay(self):
+        self.cache.replace_playlist(self.channels(3))
+        rows = self.cache.list_channels(limit=3)
+        target = rows[1]
+        FakePlayer.play_count = 0
+        FakePlayer.last_play = None
+        FakePlayer.playing = False
+        FakeBuiltins.calls = []
+        # Restaurar el hook: otros tests pueden sustituir executebuiltin.
+        self.player.xbmc.executebuiltin = FakeBuiltins.executebuiltin
+
+        self.assertTrue(self.player.play_channel(target["id"], windowed=True))
+        self.assertEqual(FakePlayer.play_count, 1)
+        self.assertTrue(FakePlayer.last_play[2])
+
+        self.assertTrue(self.player.play_channel(target["id"], windowed=False))
+        self.assertEqual(FakePlayer.play_count, 1)
+        self.assertFalse(self.player._CONTROLLER.windowed)
+        self.assertTrue(
+            any("ActivateWindow(fullscreenvideo)" in c for c in FakeBuiltins.calls)
+        )
+        self.assertTrue(self.player.is_playing_channel(target["id"]))
 
     def test_http_download_is_streamed_to_atomic_destination(self):
         payload = b"#EXTM3U\n" + b"x" * (2 * 1024 * 1024)

@@ -30,10 +30,40 @@ class PlaybackController:
                 ku.log(f"Error deteniendo reproducción: {exc}", level=2)
         self.windowed = False
 
+    def is_playing_channel(self, channel_id: int) -> bool:
+        try:
+            return bool(self.player.isPlaying()) and int(self.channel_id) == int(
+                channel_id
+            )
+        except Exception:
+            return False
+
+    def promote_to_fullscreen(self) -> bool:
+        """Pasa a pantalla completa sin reiniciar el stream activo."""
+        if not self.player.isPlaying():
+            return False
+        self.windowed = False
+        try:
+            xbmc.executebuiltin("ActivateWindow(fullscreenvideo)")
+        except Exception as exc:
+            ku.log(f"promote_to_fullscreen falló: {exc}", level=3)
+            return False
+        ku.log(
+            "playback mode=fullscreen channel={0} promote=1".format(self.channel_id)
+        )
+        return True
+
     def play(self, channel_id: int, windowed: bool) -> bool:
         from . import parental
 
-        if not parental.ensure_channel_unlocked(int(channel_id)):
+        channel_id = int(channel_id)
+        if (
+            not windowed
+            and self.is_playing_channel(channel_id)
+        ):
+            return self.promote_to_fullscreen()
+
+        if not parental.ensure_channel_unlocked(channel_id):
             return False
 
         ch = cache.get_channel(channel_id)
@@ -51,11 +81,11 @@ class PlaybackController:
             ku.notify_error(ku.get_string(30212) or "No se pudo reproducir")
             return False
 
-        self.channel_id = int(channel_id)
+        self.channel_id = channel_id
         self.url = url
         self.windowed = bool(windowed)
         try:
-            cache.add_recent(int(channel_id))
+            cache.add_recent(channel_id)
         except Exception as exc:
             ku.log(f"No se pudo guardar reciente: {exc}", level=2)
         ku.log(
@@ -148,6 +178,18 @@ def stop_playback() -> None:
 
 def active_channel_id() -> int:
     return _CONTROLLER.channel_id
+
+
+def is_playing_channel(channel_id: int) -> bool:
+    return _CONTROLLER.is_playing_channel(int(channel_id))
+
+
+def promote_to_fullscreen() -> bool:
+    return _CONTROLLER.promote_to_fullscreen()
+
+
+def active_url() -> str:
+    return _CONTROLLER.url or ""
 
 
 def select_audio_stream() -> None:
